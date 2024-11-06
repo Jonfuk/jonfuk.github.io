@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluating Health Specialist Integration in Homeless Outreach Teams Across England</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    /* Spacing Adjustments */
+    p {
+        margin-bottom: 1.25rem; /* Increased space between paragraphs */
+    }
+    h3, h4, h5 {
+        color: #2E3A59;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+        margin-top: 1.5rem; /* Space above headings */
+        margin-bottom: 1rem; /* Space below headings */
+    }
+    ul, li {
+        margin-bottom: 0.75rem; /* Space between list items */
+    }
+
+    /* Map Styling */
+    #map {
+        height: 90vh;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Button Group Styling */
+    .btn-group .btn {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .btn-primary { background-color: #2E3A59; border: none; }
+    .btn-success { background-color: #20C997; border: none; }
+    .btn-secondary { background-color: #6C757D; border: none; }
+
+    /* Accordion Styling */
+    .accordion-button {
+        background-color: #2E3A59;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        padding: 0.75rem 1.25rem;
+    }
+    .accordion-button:not(.collapsed) {
+        background-color: #20C997;
+    }
+    .accordion-body {
+        background-color: #f8f9fa;
+        padding: 1.75rem; /* Slightly increased padding for readability */
+        color: #343A40;
+    }
+    .accordion-item {
+        border: 1px solid #6C757D;
+        margin-bottom: 1.25rem; /* Space between accordion items */
+        border-radius: 8px;
+    }
+
+    /* Table Styling */
+    .table-container {
+        margin-top: 20px;
+    }
+    .table {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.95rem;
+    }
+    .table th {
+        background-color: #2E3A59;
+        color: white;
+        font-weight: bold;
+        font-family: 'Lato', sans-serif;
+    }
+    .table tbody tr:hover {
+        background-color: #e6f2ff;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #2E3A59;
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 14px;
+        margin-top: 2rem; /* Space above footer */
+    }
+
+
+        /* Print Optimization */
+        @media print {
+            body {
+                font-size: 12px;
+                color: #000;
+                background: #fff;
+            }
+            /* Hide elements that aren't needed on print */
+            #map, .btn-group, footer {
+                display: none;
+            }
+            .container, .accordion-body {
+                page-break-inside: avoid;
+            }
+            /* Adjust table styles */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                padding: 5px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container mt-3">
+        <h3>Evaluating Health Specialist Integration in Homeless Outreach Teams Across England</h3>
+<p>This project, as part of the Test and Learn Program, aims to integrate qualified health specialists within homeless outreach teams across England to address the unique and complex health needs of individuals experiencing rough sleeping. Over an 18-month period, these specialists, managed by Change Grow Live (CGL), will collaborate with outreach teams to deliver focused healthcare interventions, support pathways out of homelessness, and improve access to primary health services. Through a comprehensive evaluation, this project seeks to provide strong evidence on the impact of healthcare integration within homeless outreach, supporting future funding and policy decisions.</p>
+
+<p>Funded by the Centre for Homelessness Impact and the Department for Levelling Up, Housing and Communities, this initiative targets areas across England with the greatest needs. By embedding healthcare expertise directly into outreach efforts, the project aims to show that a comprehensive, health-centered approach can reduce rough sleeping, enhance overall health outcomes, and foster sustained engagement with healthcare services. The evidence generated will be critical in guiding policymakers, commissioners, and service providers toward more effective homelessness interventions nationwide. For more information, please visit the <a href="https://www.homelessnessimpact.org/projects/nurses-in-outreach-teams" target="_blank">Centre for Homelessness Impact project page</a>.</p>
+
+
+
+        <!-- Accordion for Expandable/Collapsible Sections -->
+	<!-- Pairings Section -->
+        <div class="accordion" id="projectAccordion">
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingProjectStructure">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectStructure" aria-expanded="false" aria-controls="collapseProjectStructure">
+            Project Structure and Implementation Overview
+        </button>
+    </h2>
+    <div id="collapseProjectStructure" class="accordion-collapse collapse" aria-labelledby="headingProjectStructure" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <h5>Overview and Lead Organizations</h5>
+            <p>This project, led by the Centre for Homelessness Impact (CHI), partners with Change Grow Live (CGL) and selected local authorities to assess the impact of embedding health-focused nurses within homeless outreach teams. While health-focused outreach is not entirely new, this initiative represents the first standardized, randomized evaluation of such an intervention.</p>
+
+            <h5>Roles and Responsibilities</h5>
+            <ul>
+                <li><strong>Centre for Homelessness Impact (CHI):</strong> As the project lead, CHI oversees the evaluation and provides implementation support, ensuring the trial's consistency and rigor.</li>
+                <li><strong>Change Grow Live (CGL):</strong> CGL is responsible for managing the nurses, including training, clinical supervision, and providing necessary resources and infrastructure support to ensure their effective integration into outreach teams.</li>
+                <li><strong>Local Authorities:</strong> Selected local authorities will host these nurses within their existing outreach teams, supporting data collection, project facilitation, and addressing local health needs among rough sleepers.</li>
+            </ul>
+
+            <h5>Implementation and Timeline</h5>
+            <p>Eight selected areas will receive one nurse each for an 18-month period starting in January 2025, while eight additional authorities will serve as control sites, providing baseline data for comparison. CHI and Cardiff University will jointly conduct a randomized controlled trial to assess the effectiveness of these interventions, with each control group area receiving a £10,000 incentive to support data collection efforts.</p>
+
+            <h5>Evaluation Process and Expected Outcomes</h5>
+            <p>The trial will capture both quantitative and qualitative data, including individual health assessments, case outcomes, and insights from focus groups. By systematically assessing health interventions within outreach teams, this project aims to establish a strong evidence base for future funding and policy development in homelessness health support.</p>
+
+            <h5>Application and Eligibility</h5>
+            <p>The application process, managed via CHI’s FlexiGrant platform, opened in May, with eligibility criteria requiring authorities to demonstrate an active outreach team and significant health needs among their rough sleeper population. Authorities without similar health-focused services were prioritized to ensure clear intervention impact.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingPairings">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePairings" aria-expanded="false" aria-controls="collapsePairings">
+            Pairings of Pilot and Monitoring Areas
+        </button>
+    </h2>
+    <div id="collapsePairings" class="accordion-collapse collapse" aria-labelledby="headingPairings">
+        <div class="accordion-body">
+            <h4>Pairings of Pilot and Monitoring Areas</h4>
+<p>Based on the designated 16 areas for this project, potential pilot and monitoring area pairings have been outlined within the Randomized Controlled Trial (RCT) framework. Each area with a high rough sleeper count has been selected as a pilot site to support robust evaluation and comparison.</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Pilot Area</th>
+            <th>Monitoring Area</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Liverpool</td><td>Preston</td></tr>
+        <tr><td>Peterborough</td><td>Solihull</td></tr>
+        <tr><td>Tameside</td><td>Oldham</td></tr>
+        <tr><td>Waltham Forest</td><td>Ealing</td></tr>
+        <tr><td>Croydon</td><td>Kingston upon Thames</td></tr>
+        <tr><td>Haringey</td><td>Greenwich</td></tr>
+        <tr><td>Hounslow</td><td>Watford</td></tr>
+        <tr><td>Christchurch and Poole</td><td>Bournemouth</td></tr>
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <h5>Rationale for Pairings</h5>
+    <p>These pilot and monitoring areas were chosen based on regions with the highest rough sleeper counts, with high-need areas designated as pilot locations to assess the full impact of embedding healthcare within outreach teams. Monitoring areas serve as comparison sites, enabling rigorous evaluation of the intervention’s effectiveness across diverse settings, including urban and suburban areas.</p>
+    <p>Each pairing considers geographical proximity and, where possible, similar demographics and homelessness challenges. This helps control external variables and enhances the validity of comparisons. For instance, pairing Liverpool with Preston allows for regional analysis within the Northwest, while Croydon and Kingston upon Thames represent comparable urban environments within Greater London, albeit with varying rough sleeper rates.</p>
+    <p>This pairing structure supports the project’s goal of generating insights into the effects of integrated health support within outreach teams on health outcomes, healthcare access, and homelessness rates in high-need areas compared to similar regions without the intervention. This approach aims to contribute to a strong evidence base for scalable solutions to reduce homelessness across England.</p>
+</div>
+        </div>
+    </div>
+</div>
+
+            <!-- Map Section -->
+            <div class="accordion-item">
+    <h2 class="accordion-header" id="headingMap">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMap" aria-expanded="true" aria-controls="collapseMap">
+            Map of Study Areas
+        </button>
+    </h2>
+    <div id="collapseMap" class="accordion-collapse collapse show" aria-labelledby="headingMap">
+        <div class="accordion-body">
+            <div class="btn-group mb-3" role="group" aria-label="Map Toggle">
+                <button type="button" class="btn btn-primary" onclick="toggleMarkers('pilot')">Show Pilot Areas</button>
+                <button type="button" class="btn btn-success" onclick="toggleMarkers('monitoring')">Show Monitoring Areas</button>
+                <button type="button" class="btn btn-secondary" onclick="toggleMarkers('both')">Show Both</button>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Study Aims and Objectives Section -->
+            <div class="accordion-item">
+    <h2 class="accordion-header" id="headingObjectives">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObjectives" aria-expanded="false" aria-controls="collapseObjectives">
+            Aims and Objectives
+        </button>
+    </h2>
+    <div id="collapseObjectives" class="accordion-collapse collapse" aria-labelledby="headingObjectives">
+        <div class="accordion-body">
+            <h4>Study Aims and Objectives</h4>
+<p>This project is part of the "Outreach with Health Specialism" initiative under the Test and Learn Program, funded by the Centre for Homelessness Impact and the Department for Levelling Up, Housing and Communities. It aims to rigorously evaluate the impact of embedding qualified health specialists within homeless outreach teams across England, specifically targeting the health, safety, and well-being needs of individuals experiencing rough sleeping. By integrating healthcare interventions into outreach work, the program seeks to improve access to medical services, reduce emergency care dependency, and support pathways out of homelessness.</p>
+
+<p>The primary objectives are to assess how embedding healthcare within outreach teams can enhance health outcomes, increase sustained service engagement, and ultimately reduce rough sleeping. This project aims to build robust evidence for future policies and provide a model that local authorities and agencies can replicate across diverse regions, including urban, suburban, and rural areas, while addressing the unique healthcare access challenges in these varied settings.</p>
+
+<h5>Objectives</h5>
+<ul>
+    <li><strong>Improving Access to Healthcare:</strong> Assess whether individuals experiencing homelessness gain improved access to healthcare services through embedded health specialists, focusing on physical and mental health needs as well as substance misuse challenges.</li>
+    <li><strong>Enhancing Health Outcomes:</strong> Track health improvements among rough sleepers in pilot areas, with an emphasis on stabilizing health conditions, managing chronic illnesses, and reducing substance misuse impacts.</li>
+    <li><strong>Reducing Rough Sleeping:</strong> Examine reductions in rough sleeping within pilot areas, particularly for individuals with complex needs who face barriers to mainstream services and stable housing.</li>
+    <li><strong>Sustained Engagement:</strong> Evaluate the intervention’s effectiveness in fostering long-term healthcare engagement for individuals who transition into accommodation, supporting reintegration into mainstream services and reducing the likelihood of returning to rough sleeping.</li>
+</ul>
+
+<h5>Key Performance Indicators (KPIs)</h5>
+<ul>
+    <li><strong>Healthcare Access Rates:</strong> Measure the proportion of individuals in pilot areas accessing healthcare services, such as regular check-ups and preventive care, compared to those in monitoring areas.</li>
+    <li><strong>Health Outcome Improvements:</strong> Track reductions in emergency room visits, acute health incidents, and substance misuse episodes within rough sleeping populations.</li>
+    <li><strong>Reduction in Rough Sleeper Count:</strong> Quantify decreases in rough sleeper counts within pilot areas, highlighting the impact of healthcare integration on housing stability.</li>
+    <li><strong>Retention in Services:</strong> Assess post-intervention healthcare engagement rates, indicating the program’s success in integrating individuals into mainstream health systems for sustainable outcomes.</li>
+</ul>
+
+<h5>Measurement Methods</h5>
+<p>In the Research Practitioner role, I will apply the following methods to assess the program's impact:</p>
+
+<ul>
+    <li><strong>Quantitative Data Collection and Analysis</strong>
+        <ul>
+            <li><em>Data Collection Approach:</em> Collect data on healthcare access rates, health outcomes, and rough sleeper counts in pilot and control areas. Using secure databases and analytics tools, I will analyze trends in ER visits, substance misuse, and primary care engagement. Data sources may include health records, outreach logs, and local NHS data.</li>
+            <li><em>Relevant Experience:</em> My background in substance misuse outreach includes managing data on service engagement and health outcomes, such as tracking trends in substance misuse and hospitalization—skills directly applicable to this data-driven approach.</li>
+        </ul>
+    </li>
+    <li><strong>Surveys and Interviews</strong>
+        <ul>
+            <li><em>Data Collection Approach:</em> Conduct surveys with homeless individuals and interviews with frontline staff to gain qualitative insights on healthcare integration. These will explore user perceptions, engagement levels, and health impact, with responses securely recorded and analyzed for key themes.</li>
+            <li><em>Relevant Experience:</em> My experience in outreach and mental health services includes regular assessments and feedback collection, equipping me to design and conduct effective surveys and interviews on treatment effectiveness and healthcare barriers.</li>
+        </ul>
+    </li>
+    <li><strong>Case Studies</strong>
+        <ul>
+            <li><em>Documentation Approach:</em> Develop case studies to highlight the successes and challenges of healthcare integration within outreach. Documenting individual journeys from initial engagement to health and housing improvements, these case studies will provide insights into service accessibility and impact.</li>
+            <li><em>Relevant Experience:</em> I have documented complex cases within outreach services, tracking engagement progression and outcomes to advocate for resources and highlight intervention success to stakeholders.</li>
+        </ul>
+    </li>
+    <li><strong>Longitudinal Studies</strong>
+        <ul>
+            <li><em>Monitoring Approach:</em> Track participant health and engagement outcomes over time to assess sustainability of healthcare access and housing stability improvements. Data sources include secure client records, reports from health and social services, and outreach team feedback.</li>
+            <li><em>Relevant Experience:</em> My work in long-term outreach programs involved monitoring service user progress over time, a skill directly applicable to longitudinal studies.</li>
+        </ul>
+    </li>
+</ul>
+
+<h5>Study Importance</h5>
+<p>This study forms part of a £15 million government investment in evidence-based homelessness interventions across England. By testing this healthcare integration model through a randomized controlled trial (RCT), the project will generate high-quality, independently validated evidence to support future funding, policy decisions, and program expansions. In collaboration with Cardiff University and leveraging CGL’s multi-agency expertise, this initiative aims to create scalable, impactful strategies to improve healthcare access and housing stability for vulnerable populations.</p>
+
+</div></div></div>
+
+
+            <!-- Details of Areas within the Study Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingDetails">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails">
+                        Area Details
+                    </button>
+                </h2>
+                <div id="collapseDetails" class="accordion-collapse collapse" aria-labelledby="headingDetails">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Area</th>
+                                    <th>Rough Sleepers (2023)</th>
+                                    <th>Population (2021)</th>
+                                    <th>Area (mi²)</th>
+                                    <th>Substance Misuse Service</th>
+                                    <th>Outreach Service</th>
+                                    <th>NHS Trust(s)</th>
+                                    <th>Homelessness Prevention Grant (£)</th>
+                                    <th>Funding Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Rows will be dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Scope and Collaborative Scale Section -->
+            <div class="accordion-item">
+    <h2 class="accordion-header" id="headingScope">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseScope" aria-expanded="false" aria-controls="collapseScope">
+            Project Scope and Collaboration
+        </button>
+    </h2>
+    <div id="collapseScope" class="accordion-collapse collapse" aria-labelledby="headingScope">
+        <div class="accordion-body">
+            <h4>Study Scope and Collaborative Scale</h4>
+<p>
+    This project is a comprehensive, multi-agency initiative designed to embed healthcare specialists within homeless outreach teams across England. Involving 16 areas—8 pilot and 8 monitoring sites—the project will require extensive collaboration across local and national entities to successfully implement and evaluate the intervention.
+</p>
+
+<h5>Estimated Project Size</h5>
+<ul>
+    <li><strong>16 Local Authorities:</strong> Each of the 16 areas (8 pilot, 8 monitoring) will involve local authorities that support and manage resources, ensure data-sharing compliance, and provide access to support infrastructure.</li>
+
+    <li><strong>Rough Sleeper Population:</strong> In 2023, the rough sleeper population across the designated areas was approximately <em>148</em> in pilot areas and <em>103</em> in monitoring areas. Based on a 27% projected increase from 2024 to 2025, we estimate the 2025 rough sleeper count to be around <em>211</em> in pilot areas and <em>146</em> in monitoring areas.</li>
+
+    <li><strong>Geographic and Population Scale:</strong> The selected areas cover a combined geographic footprint of approximately <em>867.3 mi²</em> for pilot areas and <em>671.6 mi²</em> for monitoring areas. The total population for pilot areas is around <em>2,357,700</em>, while the monitoring areas encompass approximately <em>1,721,100</em>. This broad geographic and population scope highlights the project’s extensive reach, covering diverse settings from metropolitan to suburban and rural areas.</li>
+
+    <li><strong>20+ Partner Organizations:</strong> Alongside Change Grow Live (CGL) as the primary delivery partner, various substance misuse, housing, and outreach organizations will aid both project implementation and evaluation across selected regions.</li>
+
+    <li><strong>Regional NHS Trusts:</strong> Partner NHS Trusts will collaborate by providing healthcare resources, sharing relevant health data (where compliant), and aligning the intervention with regional health priorities.</li>
+
+    <li><strong>Evaluation Partners:</strong> Cardiff University will lead the independent evaluation, coordinating with CGL, local authorities, and frontline teams to ensure accurate data tracking and robust findings.</li>
+
+    <li><strong>150+ Frontline Workers:</strong> Nurses, outreach workers, case managers, substance misuse specialists, and social workers across all participating areas will collaborate to deliver services to rough sleepers, manage cases, and document outcomes.</li>
+</ul>
+
+
+<h5>Multi-Agency Collaboration Requirements</h5>
+<p>
+    Given the project's scale, effective multi-agency collaboration is vital. Key areas of coordination include:
+</p>
+<ul>
+    <li><strong>Data Sharing and Compliance:</strong> Each area must establish data-sharing agreements to enable secure healthcare and service engagement data transfer between NHS Trusts, CGL, and Cardiff University, ensuring data protection and GDPR compliance.</li>
+    <li><strong>Service Integration:</strong> Nurses and healthcare specialists will collaborate with local outreach, housing, and substance misuse services. This integration will require aligned protocols, communication channels, and joint case management to streamline service delivery and avoid duplication.</li>
+    <li><strong>Training and Knowledge Sharing:</strong> Partners, especially CGL and local authorities, will conduct training for frontline staff on project objectives, evaluation requirements, and collaboration protocols. Regular knowledge-sharing sessions will address challenges and promote best practices.</li>
+    <li><strong>Evaluation Coordination:</strong> Cardiff University’s research team will work with local authorities and frontline workers to conduct surveys, interviews, and data collection. This will require careful scheduling, collaboration, and clear communication on evaluation protocols.</li>
+</ul>
+
+<h5>Impact of Collaborative Scale</h5>
+<p>
+    The project’s extensive scale emphasizes the need for seamless collaboration across sectors and agencies. Embedding healthcare specialists within outreach teams offers a unique opportunity to create a holistic, health-centered approach to addressing homelessness. Through this model, healthcare and homelessness services will operate in synergy, establishing a scalable and sustainable solution for vulnerable populations nationwide.
+</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingDataStreams">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDataStreams" aria-expanded="false" aria-controls="collapseDataStreams">
+            Data Streams
+        </button>
+    </h2>
+    <div id="collapseDataStreams" class="accordion-collapse collapse" aria-labelledby="headingDataStreams" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <p>This project utilizes multiple data streams to enable thorough analysis and monitoring of health interventions within homeless outreach teams. These data sources provide valuable insights into service user needs, treatment outcomes, and healthcare access, supporting evidence-based evaluation and reporting.</p>
+            
+<h5>Available Data Streams</h5>
+<ul>
+    <li><strong>NDTMS (National Drug Treatment Monitoring System):</strong> Captures data on substance misuse treatment, including service usage, demographic trends, and treatment effectiveness. This data is critical for tracking user engagement and outcomes within pilot and control areas.</li>
+    
+    <li><strong>TOPS (Treatment Outcomes Profile):</strong> Assesses changes in health and recovery status over time, focusing on quality of life improvements, substance use reduction, and health stability, aiding in the evaluation of outreach-based healthcare interventions.</li>
+    
+    <li><strong>Access to Health Records:</strong> With consent, health records provide insights into individual medical histories, emergency care usage, and long-term health conditions, supporting precise measurement of healthcare engagement and outcomes.</li>
+    
+    <li><strong>Housing and Homelessness Data:</strong> Sourced from local authorities and service providers, this data includes rough sleeper counts, housing stability, and engagement with prevention services, serving as a key metric for evaluating the project’s impact on homelessness reduction.</li>
+    
+    <li><strong>Service User Feedback and Satisfaction Surveys:</strong> Regular surveys capture user perspectives on healthcare integration, experience, and impact. This qualitative data complements quantitative findings and provides context on service effectiveness.</li>
+    
+    <li><strong>Multi-Agency Case Records:</strong> Documentation from partners such as NHS Trusts, outreach teams, and substance misuse services captures service engagement, healthcare support, and interagency collaboration, allowing for tracking of service pathways and care continuity.</li>
+</ul>
+
+<h5>Data Stream Applications</h5>
+<p>
+    Data collected from these streams will inform key performance indicators, outcome measures, and long-term impact assessments. By integrating quantitative data from systems like NDTMS and TOPS with qualitative feedback from surveys and case records, the project aims to create a comprehensive evidence base to validate the effectiveness of integrating healthcare within outreach services, specifically in improving health and housing stability outcomes.
+</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingFlexibility">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlexibility" aria-expanded="false" aria-controls="collapseFlexibility">
+            Professional Suitability and Adaptability
+        </button>
+    </h2>
+    <div id="collapseFlexibility" class="accordion-collapse collapse" aria-labelledby="headingFlexibility" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <p>My blend of practical experience and adaptability uniquely positions me for the Research Practitioner role, enabling me to navigate the diverse needs and complexities inherent to this project. My extensive work across various environments, especially within Nottinghamshire’s multi-agency settings, has deepened my understanding of local dynamics and the flexibility required to effectively support participants from different geographical and socioeconomic backgrounds.</p>
+
+<h5>Commitment to Multi-Agency Collaboration</h5>
+<p>Throughout my career, I have excelled in collaborating across multidisciplinary teams, working closely with local authorities, healthcare professionals, social workers, and outreach teams to deliver integrated support. My audit experience, which involves coordinating with external agencies, reinforces my ability to ensure clear communication, regulatory compliance, and meticulous record-keeping—all critical skills for a multi-agency research role.</p>
+
+<h5>Adaptability and Willingness to Travel</h5>
+<p>With experience covering extensive geographic areas independently, I am well-prepared for the travel demands of this role. My adaptability and dedication to navigating new settings enable effective data collection and participant engagement across varied study sites, contributing to the project’s reach and impact.</p>
+
+<h5>Technical Skills and Data Management Proficiency</h5>
+<p>My background in data management equips me with advanced skills in data collection, handling, and analysis, ensuring research integrity and precision. My experience with electronic patient record systems supports my capacity to manage complex datasets responsibly and securely—crucial for handling sensitive research data in this role.</p>
+
+<h5>Commitment to Ethical Research and Professional Growth</h5>
+<p>I am committed to upholding the highest standards of ethical research and am fully prepared to complete certifications such as Good Clinical Practice (GCP). My commitment to continuous learning through academic events and training aligns with best practices in research, reinforcing my dedication to ethically sound and impactful contributions.</p>
+
+<p>In summary, my combination of hands-on experience, adaptability, technical skills, and dedication to ethical standards makes me a strong candidate for the Research Practitioner role. I look forward to contributing meaningfully to this pivotal study, supporting positive health outcomes for vulnerable populations.</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingTech">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTech" aria-expanded="false" aria-controls="collapseTech">
+            Technology and Data Management Approach
+        </button>
+    </h2>
+    <div id="collapseTech" class="accordion-collapse collapse" aria-labelledby="headingTech" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <p>This project utilizes a robust, secure, and integrated Microsoft technology stack to manage, store, and analyze data collected across outreach teams, healthcare records, and survey responses. The data management approach focuses on ensuring data integrity, scalability, and compliance with GDPR and other regulatory requirements.</p>
+            
+            <h5>Key Microsoft Tools</h5>
+            <ul>
+                <li><strong>Azure SQL Database:</strong> Centralized data storage for large datasets, allowing scalable storage and efficient querying to support data analysis.</li>
+                <li><strong>Azure Synapse Analytics:</strong> Enables data integration and advanced analytics, allowing cross-referencing of different data streams, such as healthcare access, outcomes, and case records, for comprehensive insights.</li>
+                <li><strong>Power BI:</strong> Facilitates real-time reporting and visualization, helping stakeholders track KPIs, identify trends, and make data-driven decisions.</li>
+                <li><strong>Azure Active Directory:</strong> Ensures secure access control, allowing only authorized users to access sensitive information, in compliance with GDPR and corporate security policies.</li>
+            </ul>
+
+            <h5>Data Organization</h5>
+            <p>The database schema is structured to categorize data into core themes, such as healthcare engagement, treatment outcomes, housing stability, and service satisfaction. This structure supports detailed KPI tracking and aligns with the project’s goals of measuring health outcomes and engagement consistency across the intervention.</p>
+
+            <h5>Security and Compliance</h5>
+            <p>Our data management strategy prioritizes security and compliance. Features like data masking, encryption, and regular audits are employed to protect sensitive information. Compliance with GDPR is ensured through secure access controls and data-sharing agreements, enabling responsible and transparent data handling across multi-agency partners.</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add this at the end of your <body> section, before closing </body> tag -->
+<script>
+    document.querySelectorAll('.accordion-button').forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(() => {
+                button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+    // Centralized Data
+    const locations = [
+        { name: "Liverpool", coords: [53.4084, -2.9916], color: "blue", type: "pilot", data: { rough_sleepers: 15, population: "486,100", area: "111.8 mi²", substance_service: "We Are With You", outreach_service: "The Whitechapel Centre", nhs_trust: "Mersey Care NHS Foundation Trust", grant: "£1,997,182", notes: "Supported by Homelessness Prevention Grant; additional local initiatives possible" }},
+            { name: "Solihull", coords: [52.4128, -1.7782], color: "green", type: "monitoring", data: { rough_sleepers: 8, population: "217,500", area: "178.3 mi²", substance_service: "Solihull Integrated Addiction Service", outreach_service: "Solihull Council Outreach Team", nhs_trust: "Birmingham and Solihull Mental Health NHS Trust", grant: "£305,282", notes: "Receives allocations from national homelessness programs, adjusted by local priorities" }},
+            { name: "Oldham", coords: [53.5409, -2.1114], color: "green", type: "monitoring", data: { rough_sleepers: 5, population: "237,600", area: "142.4 mi²", substance_service: "Turning Point", outreach_service: "Oldham Council", nhs_trust: "Pennine Care NHS Foundation Trust", grant: "£168,623", notes: "Homelessness Prevention Grant-funded, aligned with GMCA (Greater Manchester Combined Authority)" }},
+            { name: "Ealing", coords: [51.5130, -0.3087], color: "green", type: "monitoring", data: { rough_sleepers: 20, population: "367,100", area: "55.5 mi²", substance_service: "RISE", outreach_service: "St Mungo's", nhs_trust: "West London NHS Trust", grant: "£1,661,487", notes: "Part of London’s homelessness and rough sleeping strategy, receives prevention funding" }},
+            { name: "Croydon", coords: [51.3762, -0.0982], color: "blue", type: "pilot", data: { rough_sleepers: 25, population: "390,800", area: "87.0 mi²", substance_service: "Turning Point", outreach_service: "Evolve Housing + Support", nhs_trust: "South London and Maudsley NHS Foundation Trust", grant: "£1,913,926", notes: "Supported by London-wide funding initiatives for homelessness" }},
+            { name: "Haringey", coords: [51.5908, -0.1097], color: "blue", type: "pilot", data: { rough_sleepers: 30, population: "263,000", area: "29.6 mi²", substance_service: "Haringey Recovery Service", outreach_service: "St Mungo's", nhs_trust: "Barnet, Enfield and Haringey Mental Health NHS Trust", grant: "£2,198,922", notes: "Participates in London’s Homelessness Prevention Grant; augmented by council resources" }},
+            { name: "Peterborough", coords: [52.5695, -0.2405], color: "blue", type: "pilot", data: { rough_sleepers: 10, population: "215,700", area: "343.4 mi²", substance_service: "Change Grow Live (CGL)", outreach_service: "Light Project Peterborough", nhs_trust: "Cambridgeshire and Peterborough NHS Foundation Trust", grant: "£424,183", notes: "Receives homelessness funding; prioritizes rough sleeping due to regional demand" }},
+            { name: "Tameside", coords: [53.4791, -2.0775], color: "blue", type: "pilot", data: { rough_sleepers: 7, population: "225,200", area: "103.0 mi²", substance_service: "Change Grow Live (CGL)", outreach_service: "Tameside Housing Advice", nhs_trust: "Pennine Care NHS Foundation Trust", grant: "£203,257", notes: "Part of GMCA funding allocations for homelessness prevention and outreach" }},
+            { name: "Greenwich", coords: [51.4934, 0.0098], color: "green", type: "monitoring", data: { rough_sleepers: 18, population: "289,100", area: "47.4 mi²", substance_service: "Change Grow Live (CGL)", outreach_service: "Thames Reach", nhs_trust: "Oxleas NHS Foundation Trust", grant: "£1,130,812", notes: "Benefits from Greater London Authority’s homelessness funding, plus local council resources" }},
+            { name: "Watford", coords: [51.6553, -0.3960], color: "green", type: "monitoring", data: { rough_sleepers: 12, population: "102,300", area: "21.6 mi²", substance_service: "Spectrum Drug and Alcohol Recovery", outreach_service: "New Hope", nhs_trust: "Hertfordshire Partnership University NHS Foundation Trust", grant: "£228,724", notes: "Supported by Homelessness Prevention Grant, county-specific initiatives" }},
+            { name: "Bournemouth", coords: [50.7192, -1.8808], color: "green", type: "monitoring", data: { rough_sleepers: 25, population: "183,500", area: "46.2 mi²", substance_service: "REACH Drug and Alcohol Services", outreach_service: "St Mungo's", nhs_trust: "Dorset HealthCare University NHS Foundation Trust", grant: "£667,160", notes: "Local authority receives national homelessness funding to address rough sleeping" }},
+            { name: "Christchurch and Poole", coords: [50.7352, -1.8385], color: "blue", type: "pilot", data: { rough_sleepers: 25, population: "211,800", area: "98.2 mi²", substance_service: "REACH Drug and Alcohol Services", outreach_service: "St Mungo's", nhs_trust: "Dorset HealthCare University NHS Foundation Trust", grant: "£667,160", notes: "Bournemouth, Christchurch, and Poole council pool resources to support homelessness programs" }},
+            { name: "Kingston upon Thames", coords: [51.4123, -0.3006], color: "green", type: "monitoring", data: { rough_sleepers: 9, population: "176,100", area: "37.3 mi²", substance_service: "Kingston Wellbeing Service", outreach_service: "SPEAR", nhs_trust: "South West London and St George's Mental Health NHS Trust", grant: "£532,803", notes: "Receives Homelessness Prevention Grant, supplemented by local council efforts" }},
+            { name: "Waltham Forest", coords: [51.5895, -0.0198], color: "blue", type: "pilot", data: { rough_sleepers: 22, population: "276,900", area: "38.8 mi²", substance_service: "Change Grow Live (CGL)", outreach_service: "Thames Reach", nhs_trust: "North East London NHS Foundation Trust", grant: "£1,361,701", notes: "Supported by Homelessness Prevention Grant and Greater London Authority resources" }},
+            { name: "Hounslow", coords: [51.4673, -0.3618], color: "blue", type: "pilot", data: { rough_sleepers: 14, population: "288,200", area: "55.5 mi²", substance_service: "iHEAR Partnership", outreach_service: "St Mungo's", nhs_trust: "West London NHS Trust", grant: "£910,623", notes: "Part of London’s combined funding for homelessness, including local council contributions" }},
+            { name: "Preston", coords: [53.7632, -2.7031], color: "green", type: "monitoring", data: { rough_sleepers: 6, population: "147,900", area: "142.9 mi²", substance_service: "Inspire Lancashire", outreach_service: "The Foxton Centre", nhs_trust: "Lancashire and South Cumbria NHS Foundation Trust", grant: "£123,098", notes: "Lancashire County Council supports with national and local homelessness funding" }},
+        // (Add all other locations as needed)
+    ];
+
+    // Initialize the map
+    const map = L.map('map').setView([53.0, -1.5], 6); // Center of the UK
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Define marker arrays
+    const pilotMarkers = [];
+    const monitoringMarkers = [];
+
+    // Function to add markers to respective arrays
+    locations.forEach(location => {
+        const marker = L.circleMarker(location.coords, {
+            color: location.color,
+            radius: 8
+        }).bindPopup(`<b>${location.name}</b><br>
+            Rough Sleepers: ${location.data.rough_sleepers}<br>
+            Population: ${location.data.population}<br>
+            Area: ${location.data.area}<br>
+            Substance Misuse Service: ${location.data.substance_service}<br>
+            Outreach Service: ${location.data.outreach_service}<br>
+            NHS Trust: ${location.data.nhs_trust}<br>
+            Homelessness Prevention Grant: ${location.data.grant}<br>
+            Funding Notes: ${location.data.notes}`);
+
+        if (location.type === "pilot") {
+            pilotMarkers.push(marker);
+        } else {
+            monitoringMarkers.push(marker);
+        }
+    });
+
+    // Toggle function for markers
+    function toggleMarkers(type) {
+        pilotMarkers.forEach(marker => map.removeLayer(marker));
+        monitoringMarkers.forEach(marker => map.removeLayer(marker));
+
+        if (type === 'pilot') {
+            pilotMarkers.forEach(marker => marker.addTo(map));
+        } else if (type === 'monitoring') {
+            monitoringMarkers.forEach(marker => marker.addTo(map));
+        } else {
+            pilotMarkers.forEach(marker => marker.addTo(map));
+            monitoringMarkers.forEach(marker => marker.addTo(map));
+        }
+        populateTable(type); // Update the table
+    }
+
+    // Function to populate the table with conditional row colors
+    function populateTable(type) {
+    const tableBody = document.getElementById("table-body");
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    locations.filter(item => type === 'both' || item.type === type)
+        .forEach(item => {
+            const row = document.createElement("tr");
+            row.style.backgroundColor = item.type === "pilot" ? "#cce5ff" : "#d4edda"; // Color coding
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.data.rough_sleepers}</td>
+                <td>${item.data.population}</td>
+                <td>${item.data.area}</td>
+                <td>${item.data.substance_service}</td>
+                <td>${item.data.outreach_service}</td>
+                <td>${item.data.nhs_trust}</td>
+                <td>${item.data.grant}</td>
+                <td>${item.data.notes}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+}
+
+
+    // Initial population of the table with both types of areas
+    populateTable('both');
+</script>
+</html>
