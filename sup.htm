@@ -22,135 +22,147 @@
 <body class="container py-4">
     <h2 class="text-center">Substance Misuse Session Form</h2>
     <form>
-        <fieldset class="border p-3 mb-3">
-            <legend>OST</legend>
-            <label>Dose:</label>
-            <input type="text" class="form-control mb-2">
-            <label>Collections:</label>
-            <input type="text" class="form-control mb-2">
-            <label>Storage:</label>
-            <select class="form-control mb-2">
-                <option>Locked</option>
-                <option>Unlocked</option>
-            </select>
-            <label>Naloxone (yes / no):</label>
-            <select id="naloxone" class="form-control mb-2" onchange="toggleNaloxoneFields()">
-                <option>No</option>
-                <option>Yes</option>
-            </select>
-            <div id="naloxoneDetails" style="display:none;">
-                <label>Batch:</label>
-                <input type="text" class="form-control mb-2">
-                <label>Expiry Date:</label>
-                <input type="date" class="form-control mb-2">
-            </div>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Engagement</legend>
-            <label>Date of last attended medical review:</label>
-            <input type="date" class="form-control mb-2">
-            <label>Missing consecutive appointments (yes / no):</label>
-            <select class="form-control mb-2">
-                <option>Yes</option>
-                <option>No</option>
-            </select>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Drugs and Alcohol</legend>
-            <label>Method, frequency, amount:</label>
-            <textarea class="form-control mb-2"></textarea>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Last Drug Screen</legend>
-            <label>Method:</label>
-            <select class="form-control mb-2">
-                <option>Saliva</option>
-                <option>Urine</option>
-                <option>Laboratory</option>
-            </select>
-            <label>Date:</label>
-            <input type="date" class="form-control mb-2">
-            <label>Positives:</label>
-            <input type="text" class="form-control mb-2">
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>TOPS</legend>
-            <label>Date of last TOPS:</label>
-            <input type="date" class="form-control mb-2">
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>BBVs</legend>
-            <label>Completed (yes / no):</label>
-            <select id="bbv" class="form-control mb-2" onchange="toggleBBVFields()">
-                <option>No</option>
-                <option>Yes</option>
-            </select>
-            <div id="bbvDetails" style="display:none;">
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>OST</legend>
+                <label>Dose:</label>
+                <input type="text" class="form-control">
+                <label>Collections:</label>
+                <input type="text" class="form-control">
+                <label>Storage:</label>
+                <select class="form-control">
+                    <option>Locked</option>
+                    <option>Unlocked</option>
+                </select>
+                <label>Naloxone (yes / no):</label>
+                <select id="naloxone" class="form-control" onchange="toggleNaloxoneFields()">
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+                <div id="naloxoneDetails" style="display:none;">
+                    <label>Batch:</label>
+                    <input type="text" class="form-control">
+                    <label>Expiry Date:</label>
+                    <input type="date" class="form-control">
+                </div>
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>Engagement</legend>
+                <label>Date of last attended medical review:</label>
+                <input type="date" class="form-control">
+                <label>Missing consecutive appointments (yes / no):</label>
+                <select class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </fieldset>
+        </div>
+        
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>Drugs and Alcohol</legend>
+                <label>Method, frequency, amount:</label>
+                <textarea class="form-control"></textarea>
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>Last Drug Screen</legend>
+                <label>Method:</label>
+                <select class="form-control">
+                    <option>Saliva</option>
+                    <option>Urine</option>
+                    <option>Laboratory</option>
+                </select>
                 <label>Date:</label>
-                <input type="date" class="form-control mb-2">
-                <label>Results:</label>
-                <input type="text" class="form-control mb-2">
-            </div>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Physical Health</legend>
-            <label>GP summary received within last 12 months (yes / no):</label>
-            <select class="form-control mb-2">
-                <option>Yes</option>
-                <option>No</option>
-            </select>
-            <label>Physical health problems:</label>
-            <textarea class="form-control mb-2"></textarea>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Mental Health</legend>
-            <label>Thoughts to harm self or others (yes/no):</label>
-            <select class="form-control mb-2">
-                <option>Yes</option>
-                <option>No</option>
-            </select>
-            <label>Mental health problems:</label>
-            <textarea class="form-control mb-2"></textarea>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Children</legend>
-            <label>Any children in the home (yes/no):</label>
-            <select class="form-control mb-2">
-                <option>Yes</option>
-                <option>No</option>
-            </select>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Social</legend>
-            <label>Stable accommodation (yes/no):</label>
-            <select class="form-control mb-2">
-                <option>Yes</option>
-                <option>No</option>
-            </select>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Risk Concerns</legend>
-            <textarea class="form-control mb-2" placeholder="How are risks being mitigated?"></textarea>
-        </fieldset>
-
-        <fieldset class="border p-3 mb-3">
-            <legend>Obstacles to Progress</legend>
-            <textarea class="form-control mb-2"></textarea>
-        </fieldset>
-
+                <input type="date" class="form-control">
+                <label>Positives:</label>
+                <input type="text" class="form-control">
+            </fieldset>
+        </div>
+        
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>TOPS</legend>
+                <label>Date of last TOPS:</label>
+                <input type="date" class="form-control">
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>BBVs</legend>
+                <label>Completed (yes / no):</label>
+                <select id="bbv" class="form-control" onchange="toggleBBVFields()">
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+                <div id="bbvDetails" style="display:none;">
+                    <label>Date:</label>
+                    <input type="date" class="form-control">
+                    <label>Results:</label>
+                    <input type="text" class="form-control">
+                </div>
+            </fieldset>
+        </div>
+        
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>Physical Health</legend>
+                <label>GP summary received within last 12 months (yes / no):</label>
+                <select class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+                <label>Physical health problems:</label>
+                <textarea class="form-control"></textarea>
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>Mental Health</legend>
+                <label>Thoughts to harm self or others (yes/no):</label>
+                <select class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+                <label>Mental health problems:</label>
+                <textarea class="form-control"></textarea>
+            </fieldset>
+        </div>
+        
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>Children</legend>
+                <label>Any children in the home (yes/no):</label>
+                <select class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>Social</legend>
+                <label>Stable accommodation (yes/no):</label>
+                <select class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </fieldset>
+        </div>
+        
+        <div class="row g-3">
+            <fieldset class="col-md-6 border p-3">
+                <legend>Risk Concerns</legend>
+                <textarea class="form-control" placeholder="How are risks being mitigated?"></textarea>
+            </fieldset>
+            
+            <fieldset class="col-md-6 border p-3">
+                <legend>Obstacles to Progress</legend>
+                <textarea class="form-control"></textarea>
+            </fieldset>
+        </div>
+        
         <fieldset class="border p-3 mb-3">
             <legend>Service User Plan / Notes</legend>
-            <textarea class="form-control mb-2"></textarea>
+            <textarea class="form-control"></textarea>
         </fieldset>
         
         <button type="submit" class="btn btn-primary">Submit</button>
