@@ -21,6 +21,56 @@
             socialDetails.style.display = stableAccommodation === "No" ? "block" : "none";
         }
     </script>
+       <style>
+        :root {
+            --primary-color: #9fb8d3; /* Light blue */
+            --secondary-color: #dce8f3; /* Very light blue */
+            --accent-color: #6a85b6; /* Medium blue */
+            --text-color: #000000; /* Black */
+            --background-color: #f8f9fa; /* Light gray */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+        }
+
+        fieldset {
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            background-color: var(--secondary-color);
+        }
+
+        legend {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-control, .form-select {
+            border: 1px solid var(--accent-color);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+    </style>
+
+
 </head>
 <body class="container py-4">
     <h2 class="text-center">Substance Misuse Session Form</h2>
