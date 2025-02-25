@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Substance Misuse Session Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function toggleNaloxoneFields() {
+            var naloxone = document.getElementById("naloxone").value;
+            var naloxoneDetails = document.getElementById("naloxoneDetails");
+            naloxoneDetails.style.display = naloxone === "Yes" ? "block" : "none";
+        }
+        
+        function toggleBBVFields() {
+            var bbv = document.getElementById("bbv").value;
+            var bbvDetails = document.getElementById("bbvDetails");
+            bbvDetails.style.display = bbv === "Yes" ? "block" : "none";
+        }
+    </script>
+</head>
+<body class="container py-4">
+    <h2 class="text-center">Substance Misuse Session Form</h2>
+    <form>
+        <fieldset class="border p-3 mb-3">
+            <legend>OST</legend>
+            <label>Dose:</label>
+            <input type="text" class="form-control mb-2">
+            <label>Collections:</label>
+            <input type="text" class="form-control mb-2">
+            <label>Storage:</label>
+            <select class="form-control mb-2">
+                <option>Locked</option>
+                <option>Unlocked</option>
+            </select>
+            <label>Naloxone (yes / no):</label>
+            <select id="naloxone" class="form-control mb-2" onchange="toggleNaloxoneFields()">
+                <option>No</option>
+                <option>Yes</option>
+            </select>
+            <div id="naloxoneDetails" style="display:none;">
+                <label>Batch:</label>
+                <input type="text" class="form-control mb-2">
+                <label>Expiry Date:</label>
+                <input type="date" class="form-control mb-2">
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Engagement</legend>
+            <label>Date of last attended medical review:</label>
+            <input type="date" class="form-control mb-2">
+            <label>Missing consecutive appointments (yes / no):</label>
+            <select class="form-control mb-2">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Drugs and Alcohol</legend>
+            <label>Method, frequency, amount:</label>
+            <textarea class="form-control mb-2"></textarea>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Last Drug Screen</legend>
+            <label>Method:</label>
+            <select class="form-control mb-2">
+                <option>Saliva</option>
+                <option>Urine</option>
+                <option>Laboratory</option>
+            </select>
+            <label>Date:</label>
+            <input type="date" class="form-control mb-2">
+            <label>Positives:</label>
+            <input type="text" class="form-control mb-2">
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>TOPS</legend>
+            <label>Date of last TOPS:</label>
+            <input type="date" class="form-control mb-2">
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>BBVs</legend>
+            <label>Completed (yes / no):</label>
+            <select id="bbv" class="form-control mb-2" onchange="toggleBBVFields()">
+                <option>No</option>
+                <option>Yes</option>
+            </select>
+            <div id="bbvDetails" style="display:none;">
+                <label>Date:</label>
+                <input type="date" class="form-control mb-2">
+                <label>Results:</label>
+                <input type="text" class="form-control mb-2">
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Physical Health</legend>
+            <label>GP summary received within last 12 months (yes / no):</label>
+            <select class="form-control mb-2">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+            <label>Physical health problems:</label>
+            <textarea class="form-control mb-2"></textarea>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Mental Health</legend>
+            <label>Thoughts to harm self or others (yes/no):</label>
+            <select class="form-control mb-2">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+            <label>Mental health problems:</label>
+            <textarea class="form-control mb-2"></textarea>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Children</legend>
+            <label>Any children in the home (yes/no):</label>
+            <select class="form-control mb-2">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Social</legend>
+            <label>Stable accommodation (yes/no):</label>
+            <select class="form-control mb-2">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Risk Concerns</legend>
+            <textarea class="form-control mb-2" placeholder="How are risks being mitigated?"></textarea>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Obstacles to Progress</legend>
+            <textarea class="form-control mb-2"></textarea>
+        </fieldset>
+
+        <fieldset class="border p-3 mb-3">
+            <legend>Service User Plan / Notes</legend>
+            <textarea class="form-control mb-2"></textarea>
+        </fieldset>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
