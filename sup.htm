@@ -190,15 +190,38 @@
         
         <div class="row g-3">
             <fieldset class="col-md-6 border p-3">
-                <legend>Physical Health</legend>
-                <label>GP summary received within last 12 months (yes / no):</label>
-                <select class="form-control">
-                    <option>Yes</option>
-                    <option>No</option>
-                </select>
-                <label>Physical health problems:</label>
-                <textarea class="form-control"></textarea>
-            </fieldset>
+    <legend>Physical Health</legend>
+    <label>GP summary received within last 12 months (yes / no):</label>
+    <select class="form-control">
+        <option>Yes</option>
+        <option>No</option>
+    </select>
+    <label>Blood results available from within the last 6 months? (yes / no):</label>
+    <select class="form-control">
+        <option>Yes</option>
+        <option>No</option>
+    </select>
+    <label>Where SAD-Q is 16 or above has an alcohol nurse assessment been completed? (yes / no):</label>
+    <select id="alcoholNurseAssessment" class="form-control" onchange="toggleAlcoholNurseOutcome()">
+        <option>Yes</option>
+        <option>No</option>
+    </select>
+    <div id="alcoholNurseOutcome" style="display:none;">
+        <label>What was the outcome of the alcohol nurse - assessment/MDT?</label>
+        <textarea class="form-control"></textarea>
+    </div>
+    <label>Physical health problems:</label>
+    <textarea class="form-control"></textarea>
+</fieldset>
+
+<script>
+    function toggleAlcoholNurseOutcome() {
+        var alcoholNurseAssessment = document.getElementById("alcoholNurseAssessment").value;
+        var alcoholNurseOutcome = document.getElementById("alcoholNurseOutcome");
+        alcoholNurseOutcome.style.display = alcoholNurseAssessment === "Yes" ? "block" : "none";
+    }
+</script>
+
             
             <fieldset class="col-md-6 border p-3">
                 <legend>Mental Health</legend>
