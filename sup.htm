@@ -56,10 +56,19 @@
                 <label>Date of last attended medical review:</label>
                 <input type="date" class="form-control">
                 <label>Missing consecutive appointments (yes / no):</label>
-                <select class="form-control">
+                <select id="missingAppointments" class="form-control" onchange="document.getElementById('dnaPathway').style.display = this.value === 'Yes' ? 'block' : 'none';">
                     <option>Yes</option>
                     <option>No</option>
                 </select>
+                <div id="dnaPathway" style="display:none;">
+                    <label>DNA Pathway followed?</label>
+                    <select class="form-control">
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <label>Engagement Notes:</label>
+                <textarea class="form-control"></textarea>
             </fieldset>
         </div>
         
