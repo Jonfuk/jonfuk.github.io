@@ -14,6 +14,12 @@
             var bbvDetails = document.getElementById("bbvDetails");
             bbvDetails.style.display = bbv === "Yes" ? "block" : "none";
         }
+        
+        function toggleSocialFields() {
+            var stableAccommodation = document.getElementById("stableAccommodation").value;
+            var socialDetails = document.getElementById("socialDetails");
+            socialDetails.style.display = stableAccommodation === "No" ? "block" : "none";
+        }
     </script>
 </head>
 <body class="container py-4">
@@ -166,13 +172,26 @@
                 </select>
             </fieldset>
             
+            <div class="row g-3">
             <fieldset class="col-md-6 border p-3">
                 <legend>Social</legend>
                 <label>Stable accommodation (yes/no):</label>
-                <select class="form-control">
+                <select id="stableAccommodation" class="form-control" onchange="toggleSocialFields()">
                     <option>Yes</option>
                     <option>No</option>
                 </select>
+                <div id="socialDetails" style="display:none;">
+                    <label>Referred to Outreach?</label>
+                    <select class="form-control">
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <label>Referred to Floating Support?</label>
+                    <select class="form-control">
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
             </fieldset>
         </div>
         
