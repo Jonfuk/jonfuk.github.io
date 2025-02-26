@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dual Diagnosis Client Session Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h2 class="text-center">Dual Diagnosis Client Session Form</h2>
+        <form>
+
+            <!-- Section 1: Opening & Rapport -->
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">1. Opening & Establishing Rapport</div>
+                <div class="card-body">
+                    <label class="form-label">General Well-being & Immediate Concerns:</label>
+                    <textarea class="form-control" rows="3" placeholder="Client's general well-being, crisis, distress, withdrawal symptoms, housing instability, risk of harm..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 2: Presenting Complaints & History -->
+            <div class="accordion" id="historyAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistory">
+                            2. Subjective Presenting Complaints & History
+                        </button>
+                    </h2>
+                    <div id="collapseHistory" class="accordion-collapse collapse show" data-bs-parent="#historyAccordion">
+                        <div class="accordion-body">
+                            
+                            <label class="form-label">Emotional State:</label>
+                            <textarea class="form-control" rows="2" placeholder="Client's emotional state, depressive symptoms, risk factors (self-harm, suicidal thoughts)..."></textarea>
+                            
+                            <label class="form-label mt-2">Substance Use & Related Behaviors:</label>
+                            <textarea class="form-control" rows="2" placeholder="Recent alcohol or drug use, withdrawal risks, coping strategies..."></textarea>
+                            
+                            <label class="form-label mt-2">Physical Health & Functioning:</label>
+                            <textarea class="form-control" rows="2" placeholder="Medical conditions, medication use, nutrition, sleep, activity levels..."></textarea>
+                            
+                            <label class="form-label mt-2">Cognitive & Psychiatric Symptoms:</label>
+                            <textarea class="form-control" rows="2" placeholder="Mental health history, hospitalizations, cognitive concerns..."></textarea>
+                            
+                            <label class="form-label mt-2">Recovery & Environment:</label>
+                            <textarea class="form-control" rows="2" placeholder="Home situation, social support, environmental stressors..."></textarea>
+                            
+                            <label class="form-label mt-2">Barriers to Treatment:</label>
+                            <textarea class="form-control" rows="2" placeholder="Transportation, childcare, finances, motivation, service access..."></textarea>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Observations & Clinician Impressions -->
+            <div class="card mt-3">
+                <div class="card-header bg-secondary text-white">3. Observations & Clinician Impressions</div>
+                <div class="card-body">
+                    <label class="form-label">Client Presentation:</label>
+                    <textarea class="form-control" rows="3" placeholder="Disheveled appearance, slow speech, signs of distress, withdrawal symptoms..."></textarea>
+                    
+                    <label class="form-label mt-2">Engagement & Insight:</label>
+                    <select class="form-select">
+                        <option selected>Select client engagement level</option>
+                        <option>Engaged & motivated</option>
+                        <option>Ambivalent</option>
+                        <option>Resistant</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 4: Clinical Assessment & Case Formulation -->
+            <div class="card mt-3">
+                <div class="card-header bg-warning text-dark">4. Clinical Assessment & Case Formulation</div>
+                <div class="card-body">
+                    <label class="form-label">Provisional Diagnosis:</label>
+                    <textarea class="form-control" rows="2" placeholder="Diagnosis based on symptoms and observations..."></textarea>
+
+                    <label class="form-label mt-2">ASAM Dimensions:</label>
+                    <textarea class="form-control" rows="4" placeholder="Dimension 1-6 analysis, withdrawal risks, recovery environment, person-centered considerations..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 5: Treatment Planning -->
+            <div class="card mt-3">
+                <div class="card-header bg-success text-white">5. Collaborative Treatment Planning</div>
+                <div class="card-body">
+                    <label class="form-label">Symptom Management Strategies:</label>
+                    <textarea class="form-control" rows="2" placeholder="CBT techniques, sleep hygiene, relaxation..."></textarea>
+
+                    <label class="form-label mt-2">Substance Use Intervention:</label>
+                    <textarea class="form-control" rows="2" placeholder="Harm reduction plan, relapse prevention, detox referrals..."></textarea>
+
+                    <label class="form-label mt-2">Social & Environmental Support:</label>
+                    <textarea class="form-control" rows="2" placeholder="Housing, employment, peer support, therapy referrals..."></textarea>
+
+                    <label class="form-label mt-2">Risk Management & Safety Planning:</label>
+                    <textarea class="form-control" rows="2" placeholder="Suicide risk, overdose risk, crisis plan..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 6: Closing & Next Steps -->
+            <div class="card mt-3">
+                <div class="card-header bg-info text-white">6. Closing & Next Steps</div>
+                <div class="card-body">
+                    <label class="form-label">Session Takeaways & Client Reflection:</label>
+                    <textarea class="form-control" rows="2" placeholder="Summary of session, client reflections, action points..."></textarea>
+
+                    <label class="form-label mt-2">Follow-Up Plan:</label>
+                    <textarea class="form-control" rows="2" placeholder="Next session focus, referrals, agency collaboration needs..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Save Session Notes</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
